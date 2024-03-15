@@ -1,0 +1,46 @@
+# keep these top level Query as nullable to prevent errors
+# and sending no data to the client even if only one queried data
+# had an error
+type Query {
+    jobs: [Job!]
+    job(id: ID!): Job
+    company(id: ID!): Company
+}
+
+
+# named with a verb
+type Mutation {
+    createJob(input: CreateJobInput!): Job
+    deleteJob(id: ID!): Job
+    updateJob(input: UpdateJobInput!): Job
+}
+
+type Job {
+    # ! at the end to make the field non-nullable
+    id: ID!
+    """ The __date__ when the job was published, ISO-8601 format """
+    date: String!
+    createdAd: String
+    """ Documentation comment for the 'title' field """
+    title: String!
+    description: String
+    company: Company!
+}
+
+type Company {
+    id: ID!
+    name: String!
+    description: String
+    jobs: [Job!]!
+}
+
+input CreateJobInput {
+    title: String!
+    description: String
+}
+
+input UpdateJobInput  {
+    id: ID!
+    title: String!
+    description: String
+}
