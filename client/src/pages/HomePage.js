@@ -13,7 +13,7 @@ function HomePage() {
     getJobs().then(setJobs)
   }, [])
 
-  console.log('[HomePage] jobs:', jobs)
+  // console.log('[HomePage] jobs:', jobs)
   return (
     <div>
       <h1 className="title">
